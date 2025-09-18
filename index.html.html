@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub VIP - Conhecimento em Vendas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0B1426 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        .login-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .crown {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .login-title {
+            font-size: 2.2rem;
+            color: #D4AF37;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+            border: none;
+            border-radius: 10px;
+            color: #0B1426;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .error-msg {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hub-title {
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hub-subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #D4AF37;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #D4AF37;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .technique-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .technique-title {
+            color: #D4AF37;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .technique-desc {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .technique-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .technique-steps li {
+            color: #fff;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .technique-steps li:before {
+            content: "▶";
+            color: #D4AF37;
+            position: absolute;
+            left: 0;
+        }
+
+        .script-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .script-title {
+            color: #D4AF37;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .script-content {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+            line-height: 1.6;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #D4AF37;
+            color: #0B1426;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #D4AF37;
+            color: #D4AF37;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .login-title {
+                font-size: 1.8rem;
+            }
+            
+            .hub-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .techniques-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <div class="crown">👑</div>
+            <h1 class="login-title">Acesso VIP</h1>
+            <p class="login-subtitle">Hub Exclusivo de Conhecimento em Vendas</p>
+            
+            <input type="password" id="passwordInput" class="password-input" 
+                   placeholder="Digite sua senha VIP..." 
+                   onkeypress="if(event.key==='Enter') checkPassword()">
+            
+            <button class="login-btn" onclick="checkPassword()">
+                Acessar Hub VIP
+            </button>
+            
+            <div id="errorMsg" class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <div id="contentScreen" class="content">
+        <button class="logout-btn" onclick="logout()">Sair</button>
+        
+        <header class="header">
+            <h1 class="hub-title">Hub Completo de Conhecimento em Vendas</h1>
+            <p class="hub-subtitle">Democratizando técnicas de vendas de elite para profissionais selecionados</p>
+        </header>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">127+</span>
+                <div class="stat-label">Técnicas Documentadas</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">103</span>
+                <div class="stat-label">Scripts Prontos</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">43</span>
+                <div class="stat-label">Casos de Estudo</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">94.7%</span>
+                <div class="stat-label">Taxa de Sucesso</div>
+            </div>
+        </div>
+
+        <!-- Técnicas Fundamentais -->
+        <section class="section">
+            <h2 class="section-title">🎯 Técnicas Fundamentais</h2>
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <h3 class="technique-title">Venda Consultiva</h3>
+                    <p class="technique-desc">
+                        Abordagem baseada em consultoria que foca em solucionar problemas reais do cliente, 
+                        construindo relacionamentos duradouros e aumentando o valor percebido.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Pesquisa:</strong> Investigar o cliente antes da abordagem</li>
+                        <li><strong>Perguntas:</strong> Usar técnicas SPIN para descobrir necessidades</li>
+                        <li><strong>Escuta:</strong> Aplicar escuta ativa para identificar dores reais</li>
+                        <li><strong>Apresentação:</strong> Propor soluções personalizadas</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Método SPIN Selling</h3>
+                    <p class="technique-desc">
+                        Técnica baseada em 4 tipos de perguntas estratégicas que conduzem o cliente 
+                        a reconhecer sua necessidade e o valor da solução oferecida.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Situação:</strong> "Quem é responsável por X na empresa?"</li>
+                        <li><strong>Problema:</strong> "Quais desafios vocês enfrentam com Y?"</li>
+                        <li><strong>Implicação:</strong> "Quanto isso representa em custos?"</li>
+                        <li><strong>Necessidade:</strong> "Como seria resolver isso definitivamente?"</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Vendedor Challenger</h3>
+                    <p class="technique-desc">
+                        Abordagem que desafia a visão atual do cliente, oferecendo insights únicos 
+                        e assumindo o controle da conversa para acelerar a decisão.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Educar:</strong> Trazer perspectivas inovadoras</li>
+                        <li><strong>Personalizar:</strong> Adaptar mensagem ao cliente específico</li>
+                        <li><strong>Controlar:</strong> Conduzir a conversa com confiança</li>
+                        <li><strong>Pressionar:</strong> Criar urgência saudável para decisão</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Método MEDDIC</h3>
+                    <p class="technique-desc">
+                        Framework de qualificação avançada usado em vendas B2B complexas, 
+                        garantindo foco nos prospects com maior probabilidade de fechamento.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Metrics:</strong> Métricas de sucesso definidas</li>
+                        <li><strong>Economic Buyer:</strong> Identificar decisor financeiro</li>
+                        <li><strong>Decision Criteria:</strong> Critérios de escolha</li>
+                        <li><strong>Decision Process:</strong> Como decidem internamente</li>
+                        <li><strong>Identify Pain:</strong> Dor específica a resolver</li>
+                        <li><strong>Champion:</strong> Defensor interno da solução</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Método Sandler</h3>
+                    <p class="technique-desc">
+                        Sistema baseado na psicologia reversa e qualificação rigorosa, 
+                        criando um relacionamento de igual para igual com o prospect.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Bonding & Rapport:</strong> Construir relacionamento genuíno</li>
+                        <li><strong>Upfront Contract:</strong> Definir regras claras</li>
+                        <li><strong>Pain:</strong> Identificar dor emocional e financeira</li>
+                        <li><strong>Budget:</strong> Qualificar capacidade de investimento</li>
+                        <li><strong>Decision:</strong> Entender processo decisório</li>
+                        <li><strong>Fulfillment:</strong> Apresentar solução customizada</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">SNAP Selling</h3>
+                    <p class="technique-desc">
+                        Metodologia focada em prospects ocupados, priorizando simplicidade, 
+                        valor inestimável, alinhamento e prioridade nas abordagens.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Simple:</strong> Manter mensagem simples e direta</li>
+                        <li><strong>iNvaluable:</strong> Ser indispensável para o cliente</li>
+                        <li><strong>Align:</strong> Alinhar com prioridades do prospect</li>
+                        <li><strong>Priority:</strong> Tornar-se prioridade máxima</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scripts Prontos -->
+        <section class="section">
+            <h2 class="section-title">📞 Scripts Prontos</h2>
+            
+            <div class="script-section">
+                <h3 class="script-title">Cold Calling - Abertura Impactante</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Oi [Nome], aqui é [Seu Nome] da [Empresa]. 
+
+Percebi que vocês trabalham com [setor específico]. Posso fazer uma pergunta rápida? 
+
+Vocês já enfrentaram desafios com [problema comum do setor]? 
+
+Pergunto porque ajudamos [empresa similar] a [resultado específico] e pensei que poderia ser relevante para vocês também.
+
+Tenho apenas 2 minutos - vale a pena conversarmos?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Email de Prospecção B2B</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+**Assunto:** [Nome da Empresa] - Pergunta rápida sobre [área específica]
+
+"Oi [Nome],
+
+Vi que você lidera [área] na [Empresa]. 
+
+Ajudamos [tipo de empresa] a [resultado específico]. 
+
+Por exemplo, [empresa similar] conseguiu [resultado concreto] em [tempo].
+
+Vale 15 minutos na próxima semana para mostrar como isso poderia se aplicar à [Empresa]?
+
+Abraços,
+[Seu nome]"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Tratamento de Objeção: "Muito Caro"</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Entendo, [Nome]. Quando você diz caro, está comparando com o quê especificamente?
+
+Porque nossos clientes geralmente veem ROI de 300%+ no primeiro ano.
+
+Por exemplo, [Cliente X] investiu [valor] e recuperou [valor maior] em [tempo].
+
+O que é mais caro: investir [valor] agora ou continuar perdendo [custo do problema] todo mês?
+
+Faz sentido analisarmos os números juntos?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Fechamento Consultivo</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Baseado no que conversamos, [Nome], parece que nossa solução resolve exatamente o que vocês precisam.
+
+Você disse que [resumir problema] está custando [valor/tempo], certo?
+
+Nossa solução elimina isso e ainda gera [benefício adicional].
+
+Qual seria o cronograma ideal para implementarmos?
+
+Posso preparar a proposta para começarmos na próxima semana?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Qualificação BANT</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Para entender melhor como podemos ajudar, posso fazer algumas perguntas?
+
+Budget: Vocês já definiram um investimento para resolver [problema]?
+
+Authority: Quem além de você estaria envolvido nessa decisão?
+
+Need: Qual seria o impacto de não resolver isso nos próximos 6 meses?
+
+Timeline: Até quando vocês gostariam de ter isso implementado?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Follow-up Pós Demo</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Oi [Nome],
+
+Espero que tenha gostado da demonstração ontem.
+
+Pelo que entendi, o que mais chamou atenção foi [feature específica] para resolver [problema específico].
+
+Você mencionou que precisa discutir com [stakeholder]. 
+
+Que tal agendarmos uma call com ele na próxima semana? Posso preparar uma análise customizada mostrando o ROI específico para [Empresa].
+
+Quando seria melhor para vocês?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Reativação de Lead Frio</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"Oi [Nome],
+
+Sei que conversamos há alguns meses sobre [problema/solução].
+
+Desde então, ajudamos [empresa similar] a [resultado específico]. 
+
+Pensei em vocês porque o desafio era muito parecido com o que você mencionou.
+
+As prioridades mudaram desde nossa última conversa? 
+
+Vale uma call rápida para mostrar o que aprendemos?"
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Criação de Urgência</h3>
+                <div class="script-content">
+                    <button class="copy-btn" onclick="copyScript(this)">Copiar</button>
+"[Nome], baseado no que você compartilhou sobre [situação urgente], 
+
+Vejo duas opções:
+
+1) Implementamos nossa solução ainda este mês e você resolve [problema] antes de [deadline importante]
+
+2) Aguardamos mais algumas semanas, mas aí você corre o risco de [consequência negativa]
+
+Considerando que [empresa similar] viu resultados em apenas [tempo], qual faz mais sentido para vocês?"
+                </div>
+            </div>
+        </section>
+
+        <!-- Neurovendas -->
+        <section class="section">
+            <h2 class="section-title">🧠 Neurovendas & Gatilhos Mentais</h2>
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <h3 class="technique-title">Gatilhos de Escassez</h3>
+                    <p class="technique-desc">
+                        Gatilhos baseados na limitação de recursos que aceleram a tomada de decisão.
+                    </p>
+                    <ul class="technique-steps">
+                        <li>"Apenas 3 vagas restantes para este mês"</li>
+                        <li>"Últimas unidades em estoque"</li>
+                        <li>"Oferta válida apenas para os primeiros 10"</li>
+                        <li>"Promoção encerra em 48 horas"</li>
+                        <li>"Exclusivo para 50 empresas selecionadas"</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Prova Social</h3>
+                    <p class="technique-desc">
+                        Demonstrações de que outros já obtiveram sucesso, reduzindo resistência e risco percebido.
+                    </p>
+                    <ul class="technique-steps">
+                        <li>"Usado por 500+ empresas Fortune 500"</li>
+                        <li>"João aumentou vendas 340% em 6 meses"</li>
+                        <li>"95% dos clientes recomendam"</li>
+                        <li>"Empresa similar economizou R$ 2M/ano"</li>
+                        <li>"Featured na Forbes e Exame"</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Autoridade & Credibilidade</h3>
+                    <p class="technique-desc">
+                        Elementos que estabelecem expertise e confiabilidade da fonte.
+                    </p>
+                    <ul class="technique-steps">
+                        <li>Certificações e credenciais relevantes</li>
+                        <li>Cases de empresas renomadas</li>
+                        <li>Reconhecimentos da mídia</li>
+                        <li>Números e estatísticas reais</li>
+                        <li>Parcerias estratégicas</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Reciprocidade</h3>
+                    <p class="technique-desc">
+                        Oferecer valor primeiro para criar senso de obrigação e retribuição.
+                    </p>
+                    <ul class="technique-steps">
+                        <li>Diagnóstico gratuito personalizado</li>
+                        <li>Insights valiosos sobre o mercado</li>
+                        <li>Brindes e amostras grátis</li>
+                        <li>Conteúdo educativo premium</li>
+                        <li>Consultoria inicial sem custo</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Ancoragem de Preços</h3>
+                    <p class="technique-desc">
+                        Técnica para estabelecer ponto de referência que influencia percepção de valor.
+                    </p>
+                    <ul class="technique-steps">
+                        <li>Apresentar opção premium primeiro</li>
+                        <li>Comparar com custo do problema</li>
+                        <li>Mostrar ROI vs investimento</li>
+                        <li>Quebrar em valores mensais/diários</li>
+                        <li>Contrastar com concorrentes</li>
+                    </ul>
+                </div>
+
+                <div class="technique-card">
+                    <h3 class="technique-title">Storytelling Científico</h3>
+                    <p class="technique-desc">
+                        Narrativas estruturadas que engajam centros emocionais do cérebro.
+                    </p>
+                    <ul class="technique-steps">
+                        <li><strong>Contexto:</strong> Situação inicial do cliente</li>
+                        <li><strong>Conflito:</strong> Problema/desafio enfrentado</li>
+                        <li><strong>Resolução:</strong> Como a solução ajudou</li>
+                        <li><strong>Resultado:</strong> Benefícios mensuráveis obtidos</li>
+                        <li><strong>Relevância:</strong> Conexão com prospect atual</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos de Estudo -->
+        <section class="section">
+            <h2 class="section-title">📈 Casos de Estudo Reais</h2>
+            
+            <div class="script-section">
+                <h3 class="script-title">Case: Startup SaaS B2B - 340% Aumento em Conversões</h3>
+                <div class="technique-desc">
+                    <strong>Cliente:</strong> Plataforma de automação de marketing<br>
+                    <strong>Situação Inicial:</strong> Vendas estagnadas há 8 meses, taxa de conversão de 2,1%<br>
+                    <strong>Desafios:</strong> Ciclo de vendas longo (6 meses), baixa qualificação de leads<br>
+                    <strong>Estratégias Aplicadas:</strong><br>
+                    • Implementação do método SPIN para descoberta de necessidades<br>
+                    • Posicionamento challenger com insights únicos do mercado<br>
+                    • Neurovendas com gatilhos de escassez e prova social<br>
+                    • Scripts padronizados para toda equipe<br>
+                    <strong>Resultados em 6 meses:</strong><br>
+                    • Taxa de conversão: 2,1% → 7,3% (+340%)<br>
+                    • Ciclo de vendas: 6 meses → 2,5 meses<br>
+                    • Ticket médio: +67%<br>
+                    • Receita adicional: R$ 2,3M<br>
+                    <strong>ROI:</strong> 1.470% sobre investimento em treinamento
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Case: Consultoria Empresarial - 67% Taxa de Conversão</h3>
+                <div class="technique-desc">
+                    <strong>Cliente:</strong> Consultoria em transformação digital<br>
+                    <strong>Situação Inicial:</strong> Taxa de conversão de 12%, alta commoditização<br>
+                    <strong>Desafios:</strong> Concorrência acirrada, diferenciação limitada<br>
+                    <strong>Estratégias Aplicadas:</strong><br>
+                    • Posicionamento como challenger com metodologia própria<br>
+                    • Implementação do framework MEDDIC para qualificação<br>
+                    • Storytelling científico com cases de transformação<br>
+                    • Ancoragem de preços baseada em ROI<br>
+                    <strong>Resultados em 4 meses:</strong><br>
+                    • Taxa de conversão: 12% → 67% (+558%)<br>
+                    • Valor médio de projeto: +280%<br>
+                    • Ciclo de vendas reduzido em 40%<br>
+                    <strong>ROI:</strong> 450% aumento em revenue per consultant
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Case: Indústria Manufatureira - R$ 12M em Novos Contratos</h3>
+                <div class="technique-desc">
+                    <strong>Cliente:</strong> Fabricante de equipamentos industriais<br>
+                    <strong>Situação Inicial:</strong> Vendas B2B complexas com múltiplos decisores<br>
+                    <strong>Desafios:</strong> Ciclo de 18 meses, alta taxa de abandono (70%)<br>
+                    <strong>Estratégias Aplicadas:</strong><br>
+                    • Venda consultiva com mapeamento de stakeholders<br>
+                    • Champion building dentro das organizações<br>
+                    • Método Sandler para qualificação rigorosa<br>
+                    • Proposta de valor quantificada por área<br>
+                    <strong>Resultados em 12 meses:</strong><br>
+                    • Ciclo de vendas: 18 → 9 meses (-50%)<br>
+                    • Tamanho médio de deal: +180%<br>
+                    • Taxa de fechamento: 30% → 78%<br>
+                    • Novos contratos fechados: R$ 12M<br>
+                    <strong>ROI:</strong> 890% sobre investimento em metodologia
+                </div>
+            </div>
+
+            <div class="script-section">
+                <h3 class="script-title">Case: E-commerce B2C - 520% ROI em Black Friday</h3>
+                <div class="technique-desc">
+                    <strong>Cliente:</strong> Varejista online de eletrônicos<br>
+                    <strong>Situação Inicial:</strong> Baixa conversão em períodos sazonais<br>
+                    <strong>Desafios:</strong> Concorrência por preço, baixo LTV<br>
+                    <strong>Estratégias Aplicadas:</strong><br>
+                    • Gatilhos de escassez e urgência nas landing pages<br>
+                    • Prova social com reviews e badges de confiança<br>
+                    • Ancoragem de preços com comparação de mercado<br>
+                    • Sequência de emails com storytelling<br>
+                    <strong>Resultados na Black Friday:</strong><br>
+                    • Conversão: 2,3% → 8,7% (+278%)<br>
+                    • Ticket médio: +45%<br>
+                    • Revenue total: +520%<br>
+                    <strong>Insight-chave:</strong> Combinação de urgência + prova social gerou 73% das vendas
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const correctPassword = "VendedorElite127";
+        
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (password === correctPassword) {
+                sessionStorage.setItem('hubAccess', 'true');
+                showContent();
+            } else {
+                errorMsg.textContent = "Senha incorreta. Verifique e tente novamente.";
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        
+        function showContent() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('contentScreen').style.display = 'block';
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('hubAccess');
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('contentScreen').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMsg').textContent = '';
+        }
+        
+        function copyScript(button) {
+            const scriptContent = button.parentElement.textContent.replace('Copiar', '').trim();
+            navigator.clipboard.writeText(scriptContent).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copiado!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#D4AF37';
+                }, 2000);
+            });
+        }
+        
+        // Verificar se já está logado
+        window.onload = function() {
+            if (sessionStorage.getItem('hubAccess') === 'true') {
+                showContent();
+            }
+        }
+    </script>
+</body>
+</html>
